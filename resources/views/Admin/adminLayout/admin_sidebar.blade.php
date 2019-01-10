@@ -22,7 +22,11 @@
 					</li>
 
 					<li>
-						<a href="{{ url('/menus/create') }}"><svg class="glyph stroked plus sign"><use xlink:href="#stroked-plus-sign"/></svg> Add menu</a>
+						<a href="{{ url('/menus/create') }}"><svg class="glyph stroked plus sign"><use xlink:href="#stroked-plus-sign"/></svg> Add Menu</a>
+					</li>
+
+					<li>
+						<a href="{{ url('/add_teacher') }}"><svg class="glyph stroked plus sign"><use xlink:href="#stroked-plus-sign"/></svg> Add Teacher</a>
 					</li>
 										
 				</ul>
@@ -49,6 +53,10 @@
 
 					<li>
 						<a href="{{ url('/submenu/view') }}"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg>Sub Menus</a>
+			 		</li>
+
+					<li>
+						<a href="{{ url('/teacher/view') }}"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg>Teachers</a>
 					</li>
 										
 				</ul>

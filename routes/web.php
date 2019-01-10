@@ -79,3 +79,12 @@ Route::post('/submenus/store',[
         'uses'=>'SubmenuController@store',
         'as'=>'submenu.store'
     ]);
+
+
+
+//Teachers part:
+// Route::resource('dashboard','teacherController')
+
+
+// To create teahcers profile
+Route::get('teacher/add_teacher','TeacherController@create');
