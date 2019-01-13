@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+// use Illuminate\Support\Facedes\Auth;
+use Illuminate\Support\Facades\Auth;
+use App\User;
+use App\Teacher;
+use Session;
 
 class TeacherController extends Controller
 {
@@ -14,7 +19,14 @@ class TeacherController extends Controller
     
     public function index()
     {
-        return view('Teacher/teacherLayout/teacherDashboard');
+        $Tid = Teacher::find(auth()->id);
+        $teacher = Auth::user();
+        echo $techer->id;
+        // $teacher =new teacher;
+        // $teachers =DB::table('teachers');
+        // echo $id;
+        // return view('Teacher/layout/dashboard')->with("teacher",$teacher);
+        return view('Teacher/layout/dashboard')->with("teacher", $teacher);
     }
 
     /**
@@ -22,11 +34,15 @@ class TeacherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Request  $request)
     {
+
         
             if($request->isMethod('get')){
-                return view('Teacher/pages/add_teacher');
+                // $teacher = Teacher::Auth()->id;
+                $teacher = Auth::user();
+                // return view('Teacher/pages/add_profile')->with("teacherdata",Teacher::find(auth()->id));
+                return view('Teacher/pages/add_profile')->with("teacher",$teacher);
         }
     }
 
@@ -38,7 +54,32 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->isMethod('post')){
+
+        $this->validate($request,[
+            'address' => 'required|string|max:255',
+            'phone'   => 'required|numeric|min|15',
+            'qualification' => 'required|string|max:255',
+            'description'  =>'required|string|max:255',
+
+            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $teacher = new Teacher;
+        $teacher->address= $request->input('address');
+        $teacher->phone=$request->input('phone');
+        $teacher->qualification=$request->input('qualification');
+        $teacher->description=$request->input('description');
+
+        $teahcer->save();
+
+        return redirect('/teacher/dashboard')->with('success','Your Profile Updated Successfully !!!');
+        // $imageName = time().'.'.request()->image->getClientOriginalExtension();
+        // request()->image->move(public_path('images'), $imageName);
+        // $teacher->image=
+            
+        }else{
+            return redirect('/')->with('flash_msg_err','You must Log-In First to access');
+        }
     }
 
     /**

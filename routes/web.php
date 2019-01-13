@@ -81,10 +81,20 @@ Route::post('/submenus/store',[
     ]);
 
 
+  //  Teachers Profile  part:
 
-//Teachers part:
-// Route::resource('dashboard','teacherController')
+  Route::resource('teachers','TeacherController');
 
+  Route::get('teacher/dashboard','TeacherController@index');
+  Route::get('teacher/add_profile','TeacherController@create');
+  Route::post('/teacher/store',[
+            'uses'=>'TeacherController@store',
+            'as'=>'teacher.store'
+            ]);
+//   Route::post('teacher/add_profile','TeacherController@store');
+//   Route::resource('teacher','TeacherController');  
 
-// To create teahcers profile
-Route::get('teacher/add_teacher','TeacherController@create');
+  //  Students Profile Part: 
+
+  Route::view('profile/student','StudentController');
+  Route::get('student/add_profile','StudentController@create');

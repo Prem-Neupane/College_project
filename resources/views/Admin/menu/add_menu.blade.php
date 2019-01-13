@@ -28,6 +28,7 @@
 					<div class="col-md-12">
 						
 						<form action="{{route('menu.store')}}" method="post">
+							
 							{{ csrf_field() }}				
 							<div class="form-group">
 								<label>Title</label>
@@ -88,8 +89,7 @@
 								    	</option>
 								    @endforeach										
 								</select>									
-							</div>		
-																						
+							</div>						
 							<div class="form-group">
 								<label>Status</label>
 								<div class="radio">

@@ -26,7 +26,11 @@
 					</li>
 
 					<li>
-						<a href="{{ url('/add_teacher') }}"><svg class="glyph stroked plus sign"><use xlink:href="#stroked-plus-sign"/></svg> Add Teacher</a>
+						<a href="{{ url('/teacher/add_profile') }}"><svg class="glyph stroked plus sign"><use xlink:href="#stroked-plus-sign"/></svg> Add Teacher Profile</a>
+					</li>
+
+					<li>
+						<a href="{{ url('/student/add_profile') }}"><svg class="glyph stroked plus sign"><use xlink:href="#stroked-plus-sign"/></svg> Add Student Profile</a>
 					</li>
 										
 				</ul>
@@ -56,7 +60,11 @@
 			 		</li>
 
 					<li>
-						<a href="{{ url('/teacher/view') }}"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg>Teachers</a>
+						<a href="{{ url('/teacher/layout/dashboard') }}"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg>Teachers</a>
+					</li>
+
+					<li>
+							<a href="{{ url('/teacher/layout/dashboard') }}"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg>Teachers</a>
 					</li>
 										
 				</ul>
