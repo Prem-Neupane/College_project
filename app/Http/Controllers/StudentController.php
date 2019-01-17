@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use App\Student;
+use Session;
+
 
 class StudentController extends Controller
 {
@@ -14,7 +20,11 @@ class StudentController extends Controller
     public function index()
     {
         //To show Student's Dashboard:
-        return view('student/layout/dashboard');
+        // if(Auth::user()->identity=='student'){
+        
+            return view('student/layout/dashboard');
+        
+        // }
     }
 
     /**
@@ -25,7 +35,13 @@ class StudentController extends Controller
     public function create()
     {
         //To add the remaining part of students profile:
-        return view('Student/pages/add_profile');
+        
+        // if(Auth::user()->identity=='student'){
+        
+            $student = Auth::user();
+        
+            return view('Student/pages/add_profile')->with('student',$student);
+        // }
     }
 
     /**
@@ -37,6 +53,12 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         //
+        if(Auth::user()->identity=='studnet'){
+
+            // if($request->isMethod()=='POST'){
+
+            // }
+        }
     }
 
     /**

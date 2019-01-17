@@ -60,11 +60,11 @@
 			 		</li>
 
 					<li>
-						<a href="{{ url('/teacher/layout/dashboard') }}"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg>Teachers</a>
+						<a href="{{ url('/teacher/layout/dashboard') }}"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg>Teacher's Table</a>
 					</li>
 
 					<li>
-							<a href="{{ url('/teacher/layout/dashboard') }}"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg>Teachers</a>
+							<a href="{{ url('/teacher/layout/dashboard') }}"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg>Student's Table</a>
 					</li>
 										
 				</ul>

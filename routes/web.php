@@ -76,8 +76,8 @@ Route::post('/menus/store',[
     ]);
 
 Route::post('/submenus/store',[
-        'uses'=>'SubmenuController@store',
-        'as'=>'submenu.store'
+        'uses'=> 'SubmenuController@store',
+         'as' => 'submenu.store'
     ]);
 
 
@@ -87,14 +87,19 @@ Route::post('/submenus/store',[
 
   Route::get('teacher/dashboard','TeacherController@index');
   Route::get('teacher/add_profile','TeacherController@create');
-  Route::post('/teacher/store',[
-            'uses'=>'TeacherController@store',
-            'as'=>'teacher.store'
-            ]);
+//   Route::post('/teacher/store',[
+//             'uses'=>'TeacherController@store',
+//             'as'=>'teacher.store'
+//             ]);
+
+Route::post('teacher/add_profile','TeacherController@store');
+
 //   Route::post('teacher/add_profile','TeacherController@store');
 //   Route::resource('teacher','TeacherController');  
 
-  //  Students Profile Part: 
 
-  Route::view('profile/student','StudentController');
+//  Students Profile Part: 
+Route::resource('students','studentsController');
+  Route::view('profile/dashboard','StudentController');
   Route::get('student/add_profile','StudentController@create');
+  Route::post('student/add_profile','StudentController@store');

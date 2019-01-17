@@ -8,7 +8,7 @@ class Teacher extends Model
 {
   protected $table = "teachers";
 
-  public function teachers(){
+  public function user(){
     return $this->belongsTO('App\User');
   }
 }

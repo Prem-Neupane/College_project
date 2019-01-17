@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facedes\Auth;
 use Illuminate\Support\Facades\Auth;
-use App\User;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+// use App\User;
 use App\Teacher;
 use Session;
 
@@ -19,14 +20,12 @@ class TeacherController extends Controller
     
     public function index()
     {
-        $Tid = Teacher::find(auth()->id);
-        $teacher = Auth::user();
-        echo $techer->id;
-        // $teacher =new teacher;
-        // $teachers =DB::table('teachers');
-        // echo $id;
-        // return view('Teacher/layout/dashboard')->with("teacher",$teacher);
-        return view('Teacher/layout/dashboard')->with("teacher", $teacher);
+
+        // if(Auth::user()->identity=='teacher'){
+            // $Tid = Teacher::find(auth()->id);
+            $teacher = Auth::user();
+            return view('Teacher/layout/dashboard');
+        // }
     }
 
     /**
@@ -34,16 +33,19 @@ class TeacherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request  $request)
+    public function create(Request $request)
     {
 
-        
+        // if(Auth::user()->identity=='teacher'){
+
             if($request->isMethod('get')){
-                // $teacher = Teacher::Auth()->id;
+           // $teacher = Teacher::Auth()->id;
                 $teacher = Auth::user();
                 // return view('Teacher/pages/add_profile')->with("teacherdata",Teacher::find(auth()->id));
                 return view('Teacher/pages/add_profile')->with("teacher",$teacher);
-        }
+            }
+
+        // }
     }
 
     /**
@@ -52,33 +54,40 @@ class TeacherController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        if($request->isMethod('post')){
+    public function store(Request $request){
+   
+    if(Auth::user()->idnetity=='teacher'){
+        
+        //   if($request->isMethod('post')){
+            // if(dd($request)){
 
-        $this->validate($request,[
-            'address' => 'required|string|max:255',
-            'phone'   => 'required|numeric|min|15',
-            'qualification' => 'required|string|max:255',
-            'description'  =>'required|string|max:255',
+                 $this->validate($request,[
+                    'address' => 'required|string|max:255',
+                    'phone'   => 'required|string|min:15|max:15',
+                    'qualification' => 'string|max:255',
+                    'description'  =>'string|max:255',  
+                    'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);
 
-            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-        $teacher = new Teacher;
-        $teacher->address= $request->input('address');
-        $teacher->phone=$request->input('phone');
-        $teacher->qualification=$request->input('qualification');
-        $teacher->description=$request->input('description');
+            $teacher = new Teacher;
+            $teacher->address= $request->input('address');
+            $teacher->phone = $request->input('phone');
+            $teacher->qualification = $request->input('qualification');
+            $teacher->description = $request->input('description');
+            $fileName = pathinfo($request->file('image')->getClientOriginalName(),PATHINFO_FILENAME);
+            $teacher->image = $fileName.'_'.time().'.'.request()->image->getClientOriginalExtension();
+            // $request()->image->move(images('images'), $imageName);
+            $path= $request->file('image')->storeAs('public/image/user',$teacher->image);
+            $teacher->save();
 
-        $teahcer->save();
-
-        return redirect('/teacher/dashboard')->with('success','Your Profile Updated Successfully !!!');
-        // $imageName = time().'.'.request()->image->getClientOriginalExtension();
-        // request()->image->move(public_path('images'), $imageName);
-        // $teacher->image=
-            
+            return redirect('/teacher/dashboard')->with('success','Your Profile Updated Successfully !!!');
+            // $imageName = time().'.'.request()->image->getClientOriginalExtension();
+            // request()->image->move(public_path('images'), $imageName);
+            // $teacher->image=
+     
+    // }        
         }else{
-            return redirect('/')->with('flash_msg_err','You must Log-In First to access');
+                return redirect('/admin')->with('flash_msg_err','You must Log-In First to access');
         }
     }
 

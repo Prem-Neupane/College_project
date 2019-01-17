@@ -53,6 +53,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    
+                                <a class="dropdown-item" href="/{{ Auth::user()->identity }}/add_profile">Update My Profile
+                                    </a>
 
                                    <a class="dropdown-item" href="/dashboard"> Dashboard
                                     </a>

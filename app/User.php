@@ -20,8 +20,7 @@ class User extends Authenticatable
 
     
 }
-
-class Teacher extends Model
+ class teachers extends Model
 {
     public function teachers(){
         return $this->hasMany('App\Teacher');
