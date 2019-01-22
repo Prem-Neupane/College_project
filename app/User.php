@@ -17,12 +17,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    
-}
- class teachers extends Model
-{
-    public function teachers(){
+ 
+    public function teachers(){    
         return $this->hasMany('App\Teacher');
-    }
+    }   
 }

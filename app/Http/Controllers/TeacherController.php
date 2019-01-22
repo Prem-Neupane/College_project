@@ -6,9 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
-// use App\User;
+use App\User;
 use App\Teacher;
 use Session;
+use DB;
 
 class TeacherController extends Controller
 {
@@ -18,13 +19,14 @@ class TeacherController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    public function index()
+    public function index(Request $request)
     {
 
         // if(Auth::user()->identity=='teacher'){
             // $Tid = Teacher::find(auth()->id);
-            $teacher = Auth::user();
-            return view('Teacher/layout/dashboard');
+            // $teacher = Auth::user();
+            $teacher = Teacher::has('user')->get();
+            return view('Teacher/pages/show_teacher')->with('teacher',$teacher);
         // }
     }
 
@@ -56,7 +58,7 @@ class TeacherController extends Controller
      */
     public function store(Request $request){
    
-    if(Auth::user()->idnetity=='teacher'){
+    // if(Auth::user()->idnetity=='teacher'){
         
         //   if($request->isMethod('post')){
             // if(dd($request)){
@@ -64,12 +66,13 @@ class TeacherController extends Controller
                  $this->validate($request,[
                     'address' => 'required|string|max:255',
                     'phone'   => 'required|string|min:15|max:15',
-                    'qualification' => 'string|max:255',
-                    'description'  =>'string|max:255',  
+                    'qualification' => 'string|max:1000',
+                    'description'  =>'string|max:1000',  
                     'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ]);
-
+            
             $teacher = new Teacher;
+            $id= Auth::user()->id;
             $teacher->address= $request->input('address');
             $teacher->phone = $request->input('phone');
             $teacher->qualification = $request->input('qualification');
@@ -77,18 +80,18 @@ class TeacherController extends Controller
             $fileName = pathinfo($request->file('image')->getClientOriginalName(),PATHINFO_FILENAME);
             $teacher->image = $fileName.'_'.time().'.'.request()->image->getClientOriginalExtension();
             // $request()->image->move(images('images'), $imageName);
-            $path= $request->file('image')->storeAs('public/image/user',$teacher->image);
+            $path= $request->file('image')->storeAs('storage/image',$teacher->image);
             $teacher->save();
-
-            return redirect('/teacher/dashboard')->with('success','Your Profile Updated Successfully !!!');
+            // return redirect('/teacher/dashboard/{id}')->with('success','Your Profile Updated Successfully !!!');
+            return redirect('/teacher/dashboard/{id}')->with("id",$id);
             // $imageName = time().'.'.request()->image->getClientOriginalExtension();
             // request()->image->move(public_path('images'), $imageName);
             // $teacher->image=
      
     // }        
-        }else{
-                return redirect('/admin')->with('flash_msg_err','You must Log-In First to access');
-        }
+        // }else{
+        //         return redirect('/admin')->with('flash_msg_err','You must Log-In First to access');
+        // }
     }
 
     /**
@@ -98,8 +101,11 @@ class TeacherController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {    
+        // $t=Teacher::find($id);
+        
+        $teacher = Auth::user();
+        return view('Teacher/layout/dashboard')->with('teacher',$teacher);
     }
 
     /**

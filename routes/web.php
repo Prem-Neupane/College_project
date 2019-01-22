@@ -85,7 +85,8 @@ Route::post('/submenus/store',[
 
   Route::resource('teachers','TeacherController');
 
-  Route::get('teacher/dashboard','TeacherController@index');
+  Route::get('view/teachers_list','TeacherController@index');
+  Route::get('teacher/dashboard/{id}','TeacherController@show');
   Route::get('teacher/add_profile','TeacherController@create');
 //   Route::post('/teacher/store',[
 //             'uses'=>'TeacherController@store',

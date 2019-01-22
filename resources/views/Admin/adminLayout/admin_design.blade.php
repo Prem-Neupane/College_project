@@ -10,8 +10,13 @@
 <link href="{{ asset('css/backend_css/styles.css') }}" rel="stylesheet">
 <link href="{{ asset('css/backend_css/bootstrap-table.css') }}" rel="stylesheet">
 
+{{-- 3 lines of code are added for teacher profile view and is to be deleted later --}}
+{{-- <link href="{{ asset('/css/bootstrap.min.css')}}" rel="stylesheet" id="bootstrap-css">
+<script src="{{ asset('js/bootstrap.min.js')}}"></script>
+<script src="{{ asset('ajax/libs/jquery/3.2.1/jquery.min.js')}}"></script>
 
-<script src="{{ asset('js/backend_js/lumino.glyphs.js') }}"></script>
+<script src="{{ asset('js/backend_js/lumino.glyphs.js') }}"></script> --}}
+
 
 </head>
 

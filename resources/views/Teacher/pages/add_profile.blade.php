@@ -94,7 +94,7 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                  {{Form::label('contact','Contact Details')}}
+                  {{Form::label('phone','Contact Details')}}
                   {{Form::text('phone','+977 ',['class'=>'form-control col-md-6','placeholder'=>'+977 '])}}
                 </div>
         </div>
